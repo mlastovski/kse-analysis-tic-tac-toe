@@ -159,7 +159,14 @@ def tic_tac_toe():
                 continue
 
         elif ask.lower() == 'last-games':
-            print('last-games is used')
+            file_to_read = open('results.txt', 'r')
+            lines = file_to_read.readlines()
+            last_lines = lines[-10:]
+            for i in last_lines:
+                print(i)
+            # print(last_lines)
+            file_to_read.close()
+            continue
 
         elif ask.lower() == 'statistics':
             print('statistics is used')
