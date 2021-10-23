@@ -164,7 +164,6 @@ def tic_tac_toe():
             last_lines = lines[-10:]
             for i in last_lines:
                 print(i)
-            # print(last_lines)
             file_to_read.close()
             continue
 
