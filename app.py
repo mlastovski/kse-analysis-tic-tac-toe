@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
-# i use dictionary to give possibility for entering the coordinates
+# I use two .txt files (stats, results). Stats is for the amount of wins/losses/draws, results is for the match results.
+
+# I use dictionary to give possibility for entering the coordinates
 field = {
     '1 1': ' ', '1 2': ' ', '1 3': ' ',
     '2 1': ' ', '2 2': ' ', '2 3': ' ',
@@ -71,12 +73,16 @@ def check_names(check_name):
         return False
 
     try:
+        # check if string contains only latin chars
         check_name.encode(encoding='utf-8').decode('ascii')
         file_to_read = open('stats.txt', 'r')
         lines = file_to_read.readlines()
         len_of_name = len(check_name)
+
+        # to skip all characters after name in list items from stats.txt
         new_lines = [x[:len_of_name] for x in lines]
 
+        # if name is not in stats.txt - append it to the file with zero stats
         if bool(check_name in new_lines) == False:
             output = check_name + ' - 0 - 0 - 0'
             file_to_write = open('stats.txt', 'a')
@@ -86,8 +92,11 @@ def check_names(check_name):
         file_to_read.close()
 
         return True
+
+    # if name contains not latin characters 
     except UnicodeDecodeError:
         return False
+
 
 def write_to_file(player_one, player_two, player_won, date):
     file_to_write = open('results.txt', 'a')
@@ -116,6 +125,7 @@ def stats(player_one, win_first, player_two, win_second):
 
         players.append(player)
 
+    # change value of wins, losses, draws
     if win_first == True:
         for e in players:
             if e['name'] == player_one:
@@ -134,6 +144,7 @@ def stats(player_one, win_first, player_two, win_second):
                 num_of_losses = int(e['losses']) + 1
                 e.update({'losses' : num_of_losses})
 
+    # draw
     if win_first == False and win_second == False:
         for e in players:
             if e['name'] == player_one:
@@ -160,8 +171,9 @@ def stats(player_one, win_first, player_two, win_second):
 # main game function
 def tic_tac_toe():
     while True:
-        ask = input('Which action? (play/last-games/statistics): ')
-
+        ask = input('Which action? (p/l/s/q): ')
+        
+        # game function
         if ask.lower() == 'p':
 
             name_one = input('Please enter name of the first player: ')
@@ -236,7 +248,8 @@ def tic_tac_toe():
             else:
                 print('Names should contain only latin characters and should be at least 3 characters long.')
                 continue
-
+        
+        # last-games
         elif ask.lower() == 'l':
             file_to_read = open('results.txt', 'r')
             lines = file_to_read.readlines()
@@ -247,7 +260,8 @@ def tic_tac_toe():
 
             file_to_read.close()
             continue
-
+        
+        # statistics
         elif ask.lower() == 's':
             file_to_read = open('stats.txt', 'r')
             lines = file_to_read.readlines()
@@ -256,6 +270,9 @@ def tic_tac_toe():
                 items = item.split(' - ')
                 output = items[0] + ' - ' + items[1] + ' wins' + ' - ' + items[2] + ' losses' + ' - ' + items[3].rstrip() + ' draws.'
                 print(output)
+
+        elif ask.lower() == 'q':
+            exit()
             
         else:
             print('There is no such action.')

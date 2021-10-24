@@ -1,5 +1,5 @@
 Ira - 4 - 1 - 0
-Mark - 1 - 2 - 0
+Mark - 4 - 3 - 0
 Mara - 0 - 1 - 0
 LALA - 0 - 1 - 0
 Lala - 1 - 0 - 0
@@ -19,3 +19,4 @@ Narroq - 0 - 0 - 0
 Ololo - 0 - 0 - 0
 Opo - 0 - 0 - 1
 Oki - 0 - 0 - 1
+Alex - 1 - 3 - 0
